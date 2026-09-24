@@ -106,6 +106,7 @@ defmodule ExWebRTC.MixProject do
       source_ref: "v#{@version}",
       formatters: ["html"],
       before_closing_body_tag: &before_closing_body_tag/1,
+      before_closing_footer_tag: &before_closing_footer_tag/1,
       nest_modules_by_prefix: [ExWebRTC],
       groups_for_extras: [
         Introduction: Path.wildcard("guides/introduction/*.md"),
@@ -118,6 +119,18 @@ defmodule ExWebRTC.MixProject do
         RTP: ~r"ExWebRTC\.RTP\..*"
       ]
     ]
+  end
+
+  defp before_closing_footer_tag(:html) do
+    """
+    <p style="text-align: center">
+      &copy; <a href="https://swmansion.com/" target="_blank" rel="noopener">Software Mansion</a>
+      <script>document.write(new Date().getFullYear())</script>.
+      All trademarks and copyrights belong to their respective owners.
+      Read about our
+      <a href="https://swmansion.com/privacy/policy/" target="_blank" rel="noopener">Privacy Policy</a>.
+    </p>
+    """
   end
 
   defp before_closing_body_tag(:html) do
